@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
+        textTheme: GoogleFonts.poppinsTextTheme(
+          Theme.of(context).textTheme,
+        ),
         scaffoldBackgroundColor:
             isDarkTheme ? const Color(0xFF00001a) : const Color(0xFFFFFFFF),
         primaryColor: Colors.blue,
