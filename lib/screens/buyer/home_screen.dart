@@ -15,19 +15,37 @@ class _HomeScreenState extends State<HomeScreen> {
     final themeState = Provider.of<DarkThemeProvider>(context);
 
     return Scaffold(
-      body: Center(
-          child: SwitchListTile(
-        title: Text('Theme'),
-        secondary: Icon(themeState.getDarkTheme
-            ? Icons.dark_mode_outlined
-            : Icons.light_mode_outlined),
-        onChanged: (bool value) {
-         setState(() {
-            themeState.setDarkTheme = value;
-         });
+      body: OrientationBuilder(
+        builder: (context, orientation) {
+          return Center(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final containerWidth = constraints.maxWidth * 0.99;
+                final containerHeight = constraints.maxHeight * 0.2;
+
+                return Container(
+                  width: containerWidth,
+                  height: containerHeight,
+                  child: SwitchListTile(
+                    title: Text('Theme'),
+                    secondary: Icon(
+                      themeState.getDarkTheme
+                          ? Icons.dark_mode_outlined
+                          : Icons.light_mode_outlined,
+                    ),
+                    onChanged: (bool value) {
+                      setState(() {
+                        themeState.setDarkTheme = value;
+                      });
+                    },
+                    value: themeState.getDarkTheme,
+                  ),
+                );
+              },
+            ),
+          );
         },
-        value: themeState.getDarkTheme,
-      )),
+      ),
     );
   }
 }
