@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfileMenu extends StatelessWidget {
-  const ProfileMenu({
-    Key? key,
-    required this.text,
-    required this.icon,
-    required this.press,
-  }) : super(key: key);
+  const ProfileMenu(
+      {Key? key,
+      required this.text,
+      required this.icon,
+      required this.onChanged,
+      this.child})
+      : super(key: key);
 
   final String text, icon;
-  final VoidCallback press;
+  final ValueChanged<bool>? onChanged;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +24,18 @@ class ProfileMenu extends StatelessWidget {
             0.01, // Adjust the vertical padding dynamically
       ),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          if (onChanged != null) {
+            // Pass the desired parameter value to the onChanged callback
+            onChanged!(true); // example parameter value
+          }
+        },
         style: ButtonStyle(
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
             EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height *
-                    0.02), // Adjust the padding dynamically
+              vertical: MediaQuery.of(context).size.height *
+                  0.02, // Adjust the padding dynamically
+            ),
           ),
           backgroundColor:
               MaterialStateProperty.all<Color>(const Color(0xFFF5F6F9)),

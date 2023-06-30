@@ -15,7 +15,6 @@ class _UserImageState extends State<UserImage> {
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
-    final isDarkMode = themeState.getDarkTheme;
 
     return SingleChildScrollView(
       child: Column(
@@ -41,7 +40,7 @@ class _UserImageState extends State<UserImage> {
           ProfileMenu(
             icon: 'assets/images/edit.svg',
             text: 'Edit your profile',
-            press: () {},
+            onChanged: (Null) {},
           ),
           SizedBox(
               height: MediaQuery.of(context).size.height *
@@ -49,7 +48,7 @@ class _UserImageState extends State<UserImage> {
           ProfileMenu(
             icon: 'assets/images/shopping-bag.svg',
             text: 'Orders',
-            press: () {},
+            onChanged: (Null) {},
           ),
           SizedBox(
               height: MediaQuery.of(context).size.height *
@@ -57,23 +56,33 @@ class _UserImageState extends State<UserImage> {
           ProfileMenu(
             icon: 'assets/images/heart.svg',
             text: 'Your wishlist',
-            press: () {},
+            onChanged: (Null) {},
           ),
           SizedBox(
               height: MediaQuery.of(context).size.height *
                   0.02), // Adjusting the spacing dynamically
+
           ProfileMenu(
-            icon: 'assets/images/edit.svg',
+            icon: 'assets/images/sun.svg',
             text: 'Theme',
-            press: () {},
+            onChanged: (bool value) {
+              themeState.setDarkTheme = value;
+            },
+            child: SwitchListTile(
+              onChanged: (bool value) {
+                themeState.setDarkTheme = value;
+              },
+              value: themeState.getDarkTheme,
+            ),
           ),
+
           SizedBox(
               height: MediaQuery.of(context).size.height *
                   0.02), // Adjusting the spacing dynamically
           ProfileMenu(
             icon: 'assets/images/log-out.svg',
             text: 'Log Out',
-            press: () {},
+            onChanged: (Null) {},
           ),
         ],
       ),
