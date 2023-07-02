@@ -62,30 +62,108 @@ class _UserImageState extends State<UserImage> {
               height: MediaQuery.of(context).size.height *
                   0.02), // Adjusting the spacing dynamically
 
-          ProfileMenu(
-            icon: 'assets/images/sun.svg',
-            text: 'Theme',
-            onChanged: (bool value) {
-              themeState.setDarkTheme = value;
-            },
-            child: SwitchListTile(
-              onChanged: (bool value) {
-                themeState.setDarkTheme = value;
+          //the start of the theme
+          SizedBox(
+            width: MediaQuery.of(context).size.width *
+                0.9, // Adjust the width as needed
+            height: 55, // Adjust the height as needed
+            child: TextButton(
+              onPressed: () {
+                setState(() {
+                  themeState.setDarkTheme = !themeState.getDarkTheme;
+                });
               },
-              value: themeState.getDarkTheme,
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all<Size>(Size.zero),
+                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                  const EdgeInsets.all(0),
+                ),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(const Color(0xFFF5F6F9)),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        right: 11), // Adjust the right padding as needed
+                    child: Icon(
+                      themeState.getDarkTheme
+                          ? Icons.dark_mode_outlined
+                          : Icons.light_mode_outlined,
+                      size: 25,
+                      color: Colors.blue,
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  const Text(
+                    'Theme',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
+                  const Spacer(),
+                  Switch(
+                    onChanged: (bool value) {
+                      setState(() {
+                        themeState.setDarkTheme = value;
+                      });
+                    },
+                    value: themeState.getDarkTheme,
+                  ),
+                ],
+              ),
             ),
-          ),
+          )
 
+          //the end of the theme
+          ,
           SizedBox(
               height: MediaQuery.of(context).size.height *
                   0.02), // Adjusting the spacing dynamically
           ProfileMenu(
             icon: 'assets/images/log-out.svg',
             text: 'Log Out',
-            onChanged: (Null) {},
+            onChanged: (Null) {
+              _showLogOutDialogue();
+            },
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> _showLogOutDialogue() async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14.1),
+          ),
+          title: const Text('Log Out'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                if (Navigator.canPop(context)) {
+                  Navigator.pop(context);
+                }
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
