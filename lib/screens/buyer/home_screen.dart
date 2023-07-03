@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: containerWidth,
                   height: containerHeight,
                   child: SwitchListTile(
-                    title: Text('Theme'),
+                    title: const Text('Theme'),
                     secondary: Icon(
                       themeState.getDarkTheme
                           ? Icons.dark_mode_outlined

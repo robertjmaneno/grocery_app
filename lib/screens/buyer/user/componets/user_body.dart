@@ -22,7 +22,7 @@ class _UserImageState extends State<UserImage> {
           const ProfilePicture(),
           const SizedBox(height: 20),
           const Text(
-            'ROBERT MANENO',
+            'Username',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,

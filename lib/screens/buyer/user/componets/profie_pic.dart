@@ -16,7 +16,7 @@ class _ProfilePictureState extends State<ProfilePicture> {
       width: 115,
       child: Stack(fit: StackFit.expand, children: [
         const CircleAvatar(
-          backgroundImage: AssetImage('assets/images/robert.jpg'),
+          backgroundImage: AssetImage('assets/images/profile.png'),
         ),
         Positioned(
           right: -9,

@@ -17,11 +17,14 @@ class BottomNavigationScreen extends StatefulWidget {
 }
 
 class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
-  int _pagesIndex = 0;
+  int _pagesIndex = 1;
 
   final List<Map<String, dynamic>> _pages = [
     {'page': const HomeScreen(), 'title': 'Home Screen'},
-    {'page': const CategoryScreen(), 'title': 'Category Screen'},
+    {
+      'page': CategoryScreen(),
+      'title': 'Category Screen'
+    }, // Added CategoryScreen here
     {'page': const CartScreen(), 'title': 'Cart Screen'},
     {'page': const UserScreen(), 'title': 'User Screen'},
   ];
@@ -36,17 +39,12 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
-      /// appBar: AppBar(
-      // title: Text(
-      //  _pages[_pagesIndex]['title'],
-      // ),
-      // ),
       body: _pages[_pagesIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: themeState.getDarkTheme
             ? Theme.of(context).cardColor
             : Colors.white,
-        type: BottomNavigationBarType.fixed, // Added this line
+        type: BottomNavigationBarType.fixed,
         currentIndex: _pagesIndex,
         onTap: _pagesUpdate,
         items: const [
